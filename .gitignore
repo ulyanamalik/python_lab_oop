@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# IDE settings
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Python distribution / build
+dist/
+build/
+*.egg-info/
+
+# Jupyter Notebook (если используешь)
+.ipynb_checkpoints
+
+# mypy / pytest (если появятся)
+.mypy_cache/
+.pytest_cache/
+__pycache__/
