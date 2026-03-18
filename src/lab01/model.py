@@ -1,73 +1,69 @@
+# model.py — класс Bus (автобус) с инкапсуляцией, свойствами и бизнес-методами
+
+from validation import (
+    validate_route, validate_capacity,
+    validate_passengers, validate_status,
+    VALID_STATUSES
+)
+
 class Bus:
-    total_buses = 0                     # атрибут класса
-    VALID_STATUSES = ('parked', 'on_route')
+    # Атрибуты класса
+    total_buses = 0                     # счётчик созданных автобусов
+    VALID_STATUSES = VALID_STATUSES     # для справки внутри класса
 
     def __init__(self, route, capacity, passengers=0, status='parked'):
-        # Валидация входных данных через отдельные методы
-        self._validate_route(route)
-        self._validate_capacity(capacity)
-        self._validate_passengers(passengers, capacity)
-        self._validate_status(status)
+        """Конструктор: инициализация с проверкой данных."""
+        validate_route(route)
+        validate_capacity(capacity)
+        validate_passengers(passengers, capacity)
+        validate_status(status)
 
         self._route = route
         self._capacity = capacity
         self._passengers = passengers
         self._status = status
-
         Bus.total_buses += 1
 
-    # ---------- Методы валидации ----------
-    def _validate_route(self, value):
-        if not isinstance(value, str) or not value.strip():
-            raise ValueError("Номер маршрута должен быть непустой строкой")
-
-    def _validate_capacity(self, value):
-        if not isinstance(value, int) or value <= 0:
-            raise ValueError("Вместимость должна быть положительным целым числом")
-
-    def _validate_passengers(self, value, capacity=None):
-        if not isinstance(value, int) or value < 0:
-            raise ValueError("Число пассажиров должно быть целым и ≥ 0")
-        if capacity is not None and value > capacity:
-            raise ValueError(f"Пассажиров не может быть больше вместимости ({capacity})")
-
-    def _validate_status(self, value):
-        if value not in Bus.VALID_STATUSES:
-            raise ValueError(f"Статус должен быть одним из {Bus.VALID_STATUSES}")
-
-    # ---------- Свойства ----------
+    # Свойства (геттеры/сеттеры)
     @property
     def route(self):
+        """Геттер номера маршрута (только чтение)."""
         return self._route
 
     @property
     def capacity(self):
+        """Геттер вместимости."""
         return self._capacity
 
     @capacity.setter
     def capacity(self, value):
-        self._validate_capacity(value)
+        """Сеттер вместимости с валидацией."""
+        validate_capacity(value)
         self._capacity = value
 
     @property
     def passengers(self):
+        """Геттер количества пассажиров."""
         return self._passengers
 
     @passengers.setter
     def passengers(self, value):
-        self._validate_passengers(value, self._capacity)
+        """Сеттер пассажиров (прямое изменение)."""
+        validate_passengers(value, self._capacity)
         self._passengers = value
 
     @property
     def status(self):
+        """Геттер состояния."""
         return self._status
 
     @status.setter
     def status(self, value):
-        self._validate_status(value)
+        """Сеттер состояния с проверкой."""
+        validate_status(value)
         self._status = value
 
-    # ---------- Бизнес-методы ----------
+    # Бизнес-методы
     def board(self, num):
         """Посадка пассажиров (только на маршруте)."""
         if self.status != 'on_route':
@@ -87,27 +83,30 @@ class Bus:
         self._passengers -= num
 
     def start_route(self):
-        """Выехать на маршрут (из парка)."""
+        """Перевод из парка на маршрут."""
         if self.status != 'parked':
             raise ValueError("Автобус уже не в парке")
         self._status = 'on_route'
 
     def park(self):
-        """Вернуться в парк (без пассажиров)."""
+        """Возврат в парк (без пассажиров)."""
         if self.status != 'on_route':
             raise ValueError("Автобус не на маршруте")
         if self.passengers != 0:
             raise ValueError("Нельзя парковаться с пассажирами")
         self._status = 'parked'
 
-    # ---------- Магические методы ----------
+    # Магические методы
     def __str__(self):
+        """Пользовательское строковое представление."""
         return f"Автобус {self.route}: {self.passengers}/{self.capacity} пасс., статус: {self.status}"
 
     def __repr__(self):
+        """Техническое представление для отладки."""
         return f"Bus('{self.route}', {self.capacity}, {self.passengers}, '{self.status}')"
 
     def __eq__(self, other):
+        """Сравнение автобусов по номеру маршрута."""
         if not isinstance(other, Bus):
             return NotImplemented
         return self.route == other.route
