@@ -1,5 +1,5 @@
 # demo.py
-from lab02.model2 import Bus
+from model2 import Bus
 from collection import BusFleet
 
 def print_separator(title):
