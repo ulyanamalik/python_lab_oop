@@ -1,24 +1,36 @@
-# model.py
-from validation2 import validate_route, validate_capacity, validate_passengers, validate_status, VALID_STATUSES
-
 class Bus:
     total_buses = 0
-    VALID_STATUSES = VALID_STATUSES  # делаем атрибутом класса для удобства
+    VALID_STATUSES = ('parked', 'on_route')
 
     def __init__(self, route, capacity, passengers=0, status='parked'):
-        validate_route(route)
-        validate_capacity(capacity)
-        validate_passengers(passengers, capacity)
-        validate_status(status)
-
+        self._validate_route(route)
+        self._validate_capacity(capacity)
+        self._validate_passengers(passengers, capacity)
+        self._validate_status(status)
         self._route = route
         self._capacity = capacity
         self._passengers = passengers
         self._status = status
         Bus.total_buses += 1
 
-    # ----- Валидация через импортированные функции (уже не нужны отдельные методы) -----
-    # ----- Свойства -----
+    def _validate_route(self, value):
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError("Номер маршрута должен быть непустой строкой")
+
+    def _validate_capacity(self, value):
+        if not isinstance(value, int) or value <= 0:
+            raise ValueError("Вместимость должна быть положительным целым числом")
+
+    def _validate_passengers(self, value, capacity=None):
+        if not isinstance(value, int) or value < 0:
+            raise ValueError("Число пассажиров должно быть целым и ≥ 0")
+        if capacity is not None and value > capacity:
+            raise ValueError(f"Пассажиров не может быть больше вместимости ({capacity})")
+
+    def _validate_status(self, value):
+        if value not in Bus.VALID_STATUSES:
+            raise ValueError(f"Статус должен быть одним из {Bus.VALID_STATUSES}")
+
     @property
     def route(self):
         return self._route
@@ -29,7 +41,7 @@ class Bus:
 
     @capacity.setter
     def capacity(self, value):
-        validate_capacity(value)
+        self._validate_capacity(value)
         self._capacity = value
 
     @property
@@ -38,7 +50,7 @@ class Bus:
 
     @passengers.setter
     def passengers(self, value):
-        validate_passengers(value, self._capacity)
+        self._validate_passengers(value, self._capacity)
         self._passengers = value
 
     @property
@@ -47,10 +59,9 @@ class Bus:
 
     @status.setter
     def status(self, value):
-        validate_status(value)
+        self._validate_status(value)
         self._status = value
 
-    # ----- Бизнес-методы -----
     def board(self, num):
         if self.status != 'on_route':
             raise ValueError("Посадка возможна только на маршруте")
@@ -79,7 +90,6 @@ class Bus:
             raise ValueError("Нельзя парковаться с пассажирами")
         self._status = 'parked'
 
-    # ----- Магические методы -----
     def __str__(self):
         return f"Автобус {self.route}: {self.passengers}/{self.capacity} пасс., статус: {self.status}"
 

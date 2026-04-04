@@ -1,4 +1,3 @@
-# demo.py
 from model2 import Bus
 from collection import BusFleet
 
