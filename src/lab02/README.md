@@ -56,7 +56,8 @@
 
 Коллекция не допускает дублирования – выбрасывается исключение ValueError, которое перехватывается, и выводится сообщение: Ошибка: Автобус с маршрутом 101 уже существует.
 
-![alt text](image-1.png)
+
+<img width="1128" height="404" alt="image" src="https://github.com/user-attachments/assets/2740a92d-ceaf-4f05-8bcd-6f935189784b" />
 
 
 
