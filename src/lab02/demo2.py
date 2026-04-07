@@ -6,12 +6,6 @@
 from model2 import Bus          # импортируем класс Bus
 from collection import BusFleet   # импортируем класс коллекции
 
-def print_separator(title):
-    """Вспомогательная функция для красивого вывода разделителей."""
-    print("\n" + "=" * 70)
-    print(f" {title}")
-    print("=" * 70)
-
 def main():
     # ---------- 1. Создаём несколько автобусов ----------
     b1 = Bus("101", 50, 10, "on_route")
@@ -19,7 +13,7 @@ def main():
     b3 = Bus("103", 40, 5, "on_route")
     b4 = Bus("104", 30, 0, "parked")
     b5 = Bus("105", 55, 20, "on_route")
-
+    print()
     # ---------- 2. Создаём коллекцию и добавляем автобусы ----------
     fleet = BusFleet()
     print("Создан автопарк (BusFleet)")
@@ -30,6 +24,7 @@ def main():
             print(f"Добавлен: {bus.route}")
         except ValueError as e:
             print(f"Ошибка добавления {bus.route}: {e}")
+    print()
 
     # Проверка защиты от дубликатов
     print("\nПопытка добавить автобус с существующим маршрутом 101:")
@@ -39,19 +34,21 @@ def main():
         print(f"  Ошибка: {e}")
 
     print(f"\nВ коллекции {len(fleet)} автобусов.")  # __len__
-
+    print()
     # ---------- 3. Вывод всех автобусов (через итерацию) ----------
-    print_separator("Все автобусы в коллекции")
+    print("Все автобусы в коллекции")
     for bus in fleet:               # __iter__
         print(bus)                  # __str__ у Bus
+    print()
 
     # ---------- 4. Поиск по маршруту ----------
-    print_separator("Поиск автобуса по маршруту")
+    print("Поиск автобуса по маршруту")
     found = fleet.find_by_route("103")
     print(f"Поиск маршрута 103: {found}")
+    print()
 
     # ---------- 5. Фильтрация (логические операции) ----------
-    print_separator("Фильтрация: автобусы на маршруте")
+    print("Фильтрация: автобусы на маршруте")
     on_route = fleet.find_all_by_status("on_route")   # новая коллекция
     for bus in on_route:
         print(bus)
@@ -60,9 +57,9 @@ def main():
     with_pass = fleet.find_all_with_passengers()
     for bus in with_pass:
         print(bus)
-
+    print()
     # ---------- 6. Сортировка ----------
-    print_separator("Сортировка по вместимости (по возрастанию)")
+    print("Сортировка по вместимости (по возрастанию)")
     fleet.sort_by_capacity()
     for bus in fleet:
         print(f"{bus.route}: вместимость {bus.capacity}")
@@ -71,20 +68,22 @@ def main():
     fleet.sort_by_route(reverse=True)
     for bus in fleet:
         print(bus.route)
-
+    print()
     # ---------- 7. Индексация (__getitem__) ----------
-    print_separator("Индексация коллекции")
+    print("Индексация коллекции")
     print(f"Первый автобус: {fleet[0]}")
     print(f"Третий автобус: {fleet[2]}")
     print(f"Срез [1:3]: {fleet[1:3]}")   # срез тоже работает
+    print()
 
     # ---------- 8. Удаление элементов ----------
-    print_separator("Удаление по объекту")
+    print("Удаление по объекту")
     print(f"Удаляем автобус с маршрутом 102: {b2}")
     fleet.remove(b2)
     print(f"Теперь в коллекции {len(fleet)} автобусов:")
     for bus in fleet:
         print(bus)
+    print()
 
     print("\nУдаление по индексу (remove_at)")
     removed = fleet.remove_at(2)
@@ -92,16 +91,16 @@ def main():
     print(f"Осталось {len(fleet)} автобусов:")
     for bus in fleet:
         print(bus)
-
+    print()
     # ---------- 9. Использование len() и итерации ещё раз ----------
-    print_separator("Использование len() и for")
+    print("Использование len() и for")
     print(f"Количество автобусов в автопарке: {len(fleet)}")
     print("Перебор всех оставшихся автобусов:")
     for i, bus in enumerate(fleet):
         print(f"  {i}: {bus.route}")
-
+    print()
     # ---------- 10. Сценарий: отправка всех паркующихся автобусов на маршрут ----------
-    print_separator("Сценарий: отправка всех автобусов на маршрут")
+    print("Сценарий: отправка всех автобусов на маршрут")
     parked_fleet = fleet.find_all_by_status("parked")
     for bus in parked_fleet:
         try:
@@ -109,9 +108,9 @@ def main():
             print(f"Автобус {bus.route} выехал на маршрут")
         except ValueError as e:
             print(f"Ошибка с {bus.route}: {e}")
-
+    print()
     # ---------- 11. Сценарий: попытка добавить некорректный тип ----------
-    print_separator("Сценарий: попытка добавить некорректный тип")
+    print("Сценарий: попытка добавить некорректный тип")
     try:
         fleet.add("это строка, не автобус")
     except TypeError as e:

@@ -35,7 +35,7 @@ class BusFleet:
 
     def remove_at(self, index):
         """
-        Удалить автобус по индексу (реализация для оценки 5).
+        Удалить автобус по индексу.
         Возвращает удалённый объект.
         """
         if not isinstance(index, int) or index < 0 or index >= len(self._items):
@@ -73,7 +73,7 @@ class BusFleet:
                 result.add(bus)
         return result
 
-    # ---------- Сортировка (для оценки 5) ----------
+    # СОРТИРОВКА
     def sort_by_route(self, reverse=False):
         """Сортировка по номеру маршрута (по возрастанию/убыванию)."""
         self._items.sort(key=lambda bus: bus.route, reverse=reverse)
