@@ -1,6 +1,4 @@
 # demo.py
-"""Демонстрация наследования и полиморфизма для лабораторной работы №3."""
-
 from base3 import Bus
 from models3 import CityBus, TouristBus
 from collection3 import BusFleet
@@ -11,7 +9,7 @@ def print_separator(title):
     print("=" * 70)
 
 def main():
-    # ========== 1. Создание объектов разных типов ==========
+    #Создание объектов разных типов
     print_separator("Создание объектов разных типов")
 
     b1 = Bus("101", 50, 10, "on_route")
@@ -26,7 +24,7 @@ def main():
     print(f"Создан: {b4}")
     print(f"Создан: {b5}")
 
-    # ========== 2. Добавление в коллекцию ==========
+    #Добавление в коллекцию
     print_separator("Добавление разных типов автобусов в коллекцию")
 
     fleet = BusFleet()
@@ -39,13 +37,13 @@ def main():
 
     print(f"\nВ коллекции {len(fleet)} автобусов.")
 
-    # ========== 3. Полиморфизм: get_bus_type() ==========
+    # Полиморфизм: get_bus_type()
     print_separator("Полиморфизм: метод get_bus_type()")
 
     for bus in fleet:
         print(f"{bus.route}: {bus.get_bus_type()}")
 
-    # ========== 4. Полиморфизм: calculate_price() ==========
+    #Полиморфизм: calculate_price()
     print_separator("Полиморфизм: метод calculate_price() (100 км)")
 
     distance = 100
@@ -53,7 +51,7 @@ def main():
         price = bus.calculate_price(distance)
         print(f"{bus.route} ({bus.get_bus_type()}): {price} руб за {distance} км")
 
-    # ========== 5. Проверка типов через isinstance() ==========
+    #Проверка типов через isinstance()
     print_separator("Проверка типов через isinstance()")
 
     for bus in fleet:
@@ -64,7 +62,7 @@ def main():
         else:
             print(f"{bus.route}: это обычный автобус")
 
-    # ========== 6. Фильтрация по типу ==========
+    # Фильтрация по типу 
     print_separator("Фильтрация: только городские автобусы")
 
     city_fleet = fleet.get_only_city_buses()
@@ -77,7 +75,7 @@ def main():
     for bus in tourist_fleet:
         print(bus)
 
-    # ========== 7. Новые методы дочерних классов ==========
+    # Новые методы дочерних классов 
     print_separator("Новые методы дочерних классов")
 
     print("Городские автобусы:")
@@ -90,7 +88,7 @@ def main():
         print(f"  Маршрут {bus.route}: туалет = {'да' if bus.has_toilet() else 'нет'}, "
               f"комфорт = {bus.get_comfort_level()}/5")
 
-    # ========== 8. Бизнес-методы ==========
+    #Бизнес-методы 
     print_separator("Бизнес-методы (посадка/высадка)")
 
     print(f"До посадки: {b2}")
@@ -100,7 +98,7 @@ def main():
     b2.alight(3)
     print(f"После высадки 3: {b2}")
 
-    # ========== 9. Полиморфизм без условий (единый вызов start_route) ==========
+    #Полиморфизм без условий (единый вызов start_route)
     print_separator("Полиморфизм без условий (единый вызов start_route)")
 
     # Создаём специальные автобусы в статусе parked для демонстрации
@@ -114,13 +112,13 @@ def main():
         bus.start_route()
         print(f"{bus.route} ({bus.get_bus_type()}) выехал на маршрут. Статус: {bus.status}")
 
-    # ========== 10. Итоговое состояние ==========
+    # Итоговое состояние
     print_separator("Итоговое состояние коллекции")
 
     for bus in fleet:
         print(bus)
 
-    # ========== 11. Демонстрация валидации ==========
+    # Демонстрация валидации
     print_separator("Демонстрация валидации (ошибки при создании)")
 
     try:
