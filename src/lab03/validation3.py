@@ -1,5 +1,4 @@
-# validation.py
-"""Модуль с функциями для проверки корректности данных автобуса."""
+
 
 VALID_STATUSES = ('parked', 'on_route')
 

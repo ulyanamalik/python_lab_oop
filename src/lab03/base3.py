@@ -1,5 +1,4 @@
-# base.py
-"""Базовый класс Bus (автобус) для лабораторной работы №3."""
+
 
 from validation3 import (
     validate_route, validate_capacity,
@@ -24,7 +23,7 @@ class Bus:
         self._status = status
         Bus.total_buses += 1
 
-    # ---------- Свойства ----------
+    #Свойства
     @property
     def route(self):
         return self._route
@@ -56,7 +55,7 @@ class Bus:
         validate_status(value)
         self._status = value
 
-    # ---------- Бизнес-методы ----------
+    #Бизнес-методы
     def board(self, num):
         if self.status != 'on_route':
             raise ValueError("Посадка возможна только на маршруте")
@@ -85,7 +84,7 @@ class Bus:
             raise ValueError("Нельзя парковаться с пассажирами")
         self._status = 'parked'
 
-    # ---------- Полиморфные методы (будут переопределяться) ----------
+    #Полиморфные методы (будут переопределяться)
     def get_bus_type(self):
         """Возвращает тип автобуса."""
         return "Обычный автобус"
@@ -94,7 +93,7 @@ class Bus:
         """Рассчитывает стоимость поездки (базовая: 20 руб/км)."""
         return distance_km * 20
 
-    # ---------- Магические методы ----------
+    #Магические методы
     def __str__(self):
         return f"Автобус {self.route}: {self.passengers}/{self.capacity} пасс., статус: {self.status}"
 

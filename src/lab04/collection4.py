@@ -1,5 +1,8 @@
 # collection.py
-from base3 import Bus
+"""Класс-контейнер для хранения автобусов с возможностью фильтрации по интерфейсу."""
+
+from models4 import Bus
+from interfaces4 import Printable, Comparable
 
 class BusFleet:
     def __init__(self):
@@ -26,7 +29,7 @@ class BusFleet:
     def get_all(self):
         return self._items.copy()
 
-    # Поиск
+    # ---------- Поиск ----------
     def find_by_route(self, route):
         for bus in self._items:
             if bus.route == route:
@@ -40,43 +43,37 @@ class BusFleet:
                 result.add(bus)
         return result
 
-    def find_all_with_passengers(self):
+    # ---------- ФИЛЬТРАЦИЯ ПО ИНТЕРФЕЙСУ (для оценки 5) ----------
+    def get_printable(self):
+        """Возвращает новую коллекцию объектов, реализующих интерфейс Printable."""
         result = BusFleet()
         for bus in self._items:
-            if bus.passengers > 0:
+            if isinstance(bus, Printable):
                 result.add(bus)
         return result
 
-    # Фильтрация по типу
-    def get_only_city_buses(self):
-        """Возвращает новую коллекцию только с городскими автобусами."""
-        from models3 import CityBus
+    def get_comparable(self):
+        """Возвращает новую коллекцию объектов, реализующих интерфейс Comparable."""
         result = BusFleet()
         for bus in self._items:
-            if isinstance(bus, CityBus):
+            if isinstance(bus, Comparable):
                 result.add(bus)
         return result
 
-    def get_only_tourist_buses(self):
-        """Возвращает новую коллекцию только с туристическими автобусами."""
-        from models3 import TouristBus
+    def get_price_calculable(self):
+        """Возвращает новую коллекцию объектов, реализующих интерфейс PriceCalculable."""
+        from interfaces4 import PriceCalculable
         result = BusFleet()
         for bus in self._items:
-            if isinstance(bus, TouristBus):
+            if isinstance(bus, PriceCalculable):
                 result.add(bus)
         return result
 
-    #Сортировка
+    # ---------- Сортировка (использует Comparable) ----------
     def sort_by_route(self, reverse=False):
         self._items.sort(key=lambda bus: bus.route, reverse=reverse)
 
-    def sort_by_capacity(self, reverse=False):
-        self._items.sort(key=lambda bus: bus.capacity, reverse=reverse)
-
-    def sort_by_passengers(self, reverse=False):
-        self._items.sort(key=lambda bus: bus.passengers, reverse=reverse)
-
-    #Магические методы
+    # ---------- Магические методы ----------
     def __len__(self):
         return len(self._items)
 
@@ -88,6 +85,3 @@ class BusFleet:
 
     def __str__(self):
         return f"BusFleet with {len(self)} buses: {[bus.route for bus in self._items]}"
-
-    def __repr__(self):
-        return f"BusFleet({self._items})"

@@ -1,4 +1,4 @@
-# models.py
+
 """Дочерние классы автобусов: CityBus и TouristBus."""
 
 from base3 import Bus
@@ -18,14 +18,14 @@ class CityBus(Bus):
         self._route_type = route_type
         self._has_air_conditioning = has_air_conditioning   # bool
 
-    # ---------- Новые методы ----------
+    # Новые методы 
     def get_route_type(self):
         return self._route_type
 
     def has_ac(self):
         return self._has_air_conditioning
 
-    # ---------- Переопределение методов базового класса (полиморфизм) ----------
+    #Переопределение методов базового класса (полиморфизм)
     def get_bus_type(self):
         return "Городской автобус"
 
@@ -33,7 +33,7 @@ class CityBus(Bus):
         """Городской автобус дешевле: 15 руб/км."""
         return distance_km * 15
 
-    # ---------- Переопределение __str__ ----------
+    #Переопределение __str__
     def __str__(self):
         ac_str = "с кондиционером" if self._has_air_conditioning else "без кондиционера"
         return (f"Городской автобус {self.route}: {self.passengers}/{self.capacity} пасс., "
@@ -56,14 +56,14 @@ class TouristBus(Bus):
         self._has_toilet = has_toilet          # bool
         self._comfort_level = comfort_level    # int: 1-5
 
-    # ---------- Новые методы ----------
+    # Новые методы 
     def has_toilet(self):
         return self._has_toilet
 
     def get_comfort_level(self):
         return self._comfort_level
 
-    # ---------- Переопределение методов базового класса (полиморфизм) ----------
+    # Переопределение методов базового класса (полиморфизм)
     def get_bus_type(self):
         return "Туристический автобус"
 
@@ -71,7 +71,7 @@ class TouristBus(Bus):
         """Туристический автобус дороже: 35 руб/км."""
         return distance_km * 35
 
-    # ---------- Переопределение __str__ ----------
+    #Переопределение __str__ 
     def __str__(self):
         toilet_str = "с туалетом" if self._has_toilet else "без туалета"
         return (f"Туристический автобус {self.route}: {self.passengers}/{self.capacity} пасс., "
