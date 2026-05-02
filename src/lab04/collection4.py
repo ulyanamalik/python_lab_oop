@@ -1,5 +1,4 @@
-# collection.py
-"""Класс-контейнер для хранения автобусов с возможностью фильтрации по интерфейсу."""
+
 
 from models4 import Bus
 from interfaces4 import Printable, Comparable
@@ -43,7 +42,7 @@ class BusFleet:
                 result.add(bus)
         return result
 
-    # ---------- ФИЛЬТРАЦИЯ ПО ИНТЕРФЕЙСУ (для оценки 5) ----------
+    #ФИЛЬТРАЦИЯ ПО ИНТЕРФЕЙСУ
     def get_printable(self):
         """Возвращает новую коллекцию объектов, реализующих интерфейс Printable."""
         result = BusFleet()

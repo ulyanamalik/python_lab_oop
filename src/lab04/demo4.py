@@ -1,6 +1,3 @@
-# demo.py
-"""Демонстрация интерфейсов и абстрактных классов для лабораторной работы №4."""
-
 from models4 import Bus, CityBus, TouristBus
 from collection4 import BusFleet
 from interfaces4 import Printable, Comparable, PriceCalculable
@@ -10,7 +7,7 @@ def print_separator(title):
     print(f" {title}")
     print("=" * 70)
 
-# ---------- Универсальная функция, работающая через интерфейс (для оценки 4) ----------
+# ---------- Универсальная функция, работающая через интерфейс----------
 def print_all_printable(items):
     """Принимает список объектов с интерфейсом Printable и выводит их."""
     for item in items:
