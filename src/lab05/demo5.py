@@ -1,5 +1,4 @@
-# demo.py
-"""Демонстрация функций высшего порядка, стратегий и цепочек операций."""
+
 
 from models5 import Bus, CityBus, TouristBus
 from collection5 import BusFleet
@@ -43,7 +42,7 @@ def main():
 
     print_collection("Исходная коллекция", fleet)
 
-    # ========== 2. СОРТИРОВКА С РАЗНЫМИ СТРАТЕГИЯМИ (оценка 3) ==========
+    #2. СОРТИРОВКА С РАЗНЫМИ СТРАТЕГИЯМИ
     print_separator("Сортировка по маршруту (by_route)")
     sorted_fleet = BusFleet()
     for bus in sorted(fleet.get_all(), key=by_route):
@@ -68,7 +67,7 @@ def main():
         sorted_fleet.add(bus)
     print_collection("После составной сортировки", sorted_fleet)
 
-    # ========== 3. ФИЛЬТРАЦИЯ С РАЗНЫМИ ФУНКЦИЯМИ (оценка 3) ==========
+    # 3. ФИЛЬТРАЦИЯ С РАЗНЫМИ ФУНКЦИЯМИ
     print_separator("Фильтрация: автобусы на маршруте")
     on_route_buses = list(filter(is_on_route, fleet.get_all()))
     print(f"На маршруте ({len(on_route_buses)}): {[b.route for b in on_route_buses]}")
@@ -77,7 +76,7 @@ def main():
     with_passengers = list(filter(has_passengers, fleet.get_all()))
     print(f"С пассажирами ({len(with_passengers)}): {[b.route for b in with_passengers]}")
 
-    # ========== 4. ПРИМЕНЕНИЕ map() (оценка 4) ==========
+    # 4. ПРИМЕНЕНИЕ map()
     print_separator("map(): извлечение номеров маршрутов")
     routes = list(map(to_route, fleet.get_all()))
     print(f"Маршруты: {routes}")
@@ -93,7 +92,7 @@ def main():
     for res in discount_results:
         print(f"  {res}")
 
-    # ========== 5. ФАБРИКА ФУНКЦИЙ ДЛЯ ФИЛЬТРАЦИИ (оценка 4) ==========
+    #5. ФАБРИКА ФУНКЦИЙ ДЛЯ ФИЛЬТРАЦИИ
     print_separator("Фабрика фильтров: вместимость < 40")
     filter_capacity_less_40 = capacity_less_than(40)
     small_buses = list(filter(filter_capacity_less_40, fleet.get_all()))
@@ -104,7 +103,7 @@ def main():
     large_buses = list(filter(filter_capacity_greater_45, fleet.get_all()))
     print(f"Автобусы с вместимостью > 45: {[b.route for b in large_buses]}")
 
-    # ========== 6. МЕТОДЫ КОЛЛЕКЦИИ sort_by() и filter_by() (оценка 4) ==========
+    #6. МЕТОДЫ КОЛЛЕКЦИИ sort_by() и filter_by()
     print_separator("Метод коллекции sort_by(by_capacity)")
     fleet_copy = BusFleet()
     for bus in fleet.get_all():
@@ -123,7 +122,7 @@ def main():
     print(f"named:  {[b.route for b in named_sorted]}")
     print("Результаты одинаковы!")
 
-    # ========== 7. ПАТТЕРН «СТРАТЕГИЯ» ЧЕРЕЗ CALLABLE-ОБЪЕКТЫ (оценка 5) ==========
+    #7. ПАТТЕРН «СТРАТЕГИЯ» ЧЕРЕЗ CALLABLE-ОБЪЕКТЫ
     print_separator("Callable-объект RouteSorter как стратегия сортировки")
     route_sorter = RouteSorter()
     sorted_by_callable = sorted(fleet.get_all(), key=route_sorter)
@@ -134,7 +133,7 @@ def main():
     on_route_callable = list(filter(on_route_filter, fleet.get_all()))
     print(f"Фильтрация через callable: {[b.route for b in on_route_callable]}")
 
-    # ========== 8. МЕТОД apply() — применение функции ко всем элементам (оценка 5) ==========
+    #8. МЕТОД apply() — применение функции ко всем элементам
     print_separator("Метод apply(): добавление пассажиров (стратегия AddPassengersStrategy)")
     add_5_strategy = AddPassengersStrategy(5)
     results = fleet.apply(add_5_strategy)
@@ -143,7 +142,7 @@ def main():
 
     print_collection("Коллекция после добавления пассажиров", fleet)
 
-    # ========== 9. ЦЕПОЧКА ОПЕРАЦИЙ (filter → sort → map) (оценка 5) ==========
+    #9. ЦЕПОЧКА ОПЕРАЦИЙ (filter → sort → map)
     print_separator("Цепочка операций: фильтрация -> сортировка -> преобразование")
 
     # Сценарий 1: берём автобусы на маршруте, сортируем по вместимости, выводим маршруты
@@ -179,7 +178,7 @@ def main():
 
     print("\n Все стратегии взаимозаменяемы — код коллекции не менялся!")
 
-    # ========== 10. ДОПОЛНИТЕЛЬНЫЕ СЦЕНАРИИ ==========
+    # 10. ДОПОЛНИТЕЛЬНЫЕ СЦЕНАРИИ
     print_separator("Дополнительный сценарий: фильтрация по типу (городские/туристические)")
     
     city_buses = fleet.filter_by(is_city_bus)

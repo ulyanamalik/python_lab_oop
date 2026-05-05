@@ -1,5 +1,4 @@
-# collection.py
-"""Класс-контейнер BusFleet с поддержкой функций высшего порядка."""
+
 
 from models5 import Bus
 
@@ -35,7 +34,6 @@ class BusFleet:
     def __str__(self):
         return f"BusFleet with {len(self)} buses: {[bus.route for bus in self._items]}"
 
-    # ========== НОВЫЕ МЕТОДЫ ДЛЯ ЛР-5 ==========
 
     def sort_by(self, key_func, reverse=False):
         """
