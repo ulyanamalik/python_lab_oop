@@ -110,20 +110,22 @@
 Поясняется, что классы Bus, CityBus и TouristBus не наследуются от протоколов Displayable и Scorable. Тем не менее, они успешно используются в специализированных коллекциях, потому что имеют нужные методы. Это и есть структурная типизация – важен интерфейс, а не наследование.
 
 <img width="1184" height="244" alt="image" src="https://github.com/user-attachments/assets/4d463aef-360b-4f47-b409-83ce02320124" />
-<img width="1014" height="178" alt="image" src="https://github.com/user-attachments/assets/2cb9793c-4e99-4795-ac2d-92be5b392d1d" />
 
 
 ### Сценарий 9: Комбинация filter и map
 Сначала отбираются автобусы на маршруте (filter), затем из отобранных извлекаются номера маршрутов (map). Показано, как можно комбинировать методы для сложных преобразований.
 
-<img width="842" height="128" alt="image" src="https://github.com/user-attachments/assets/1bc19db8-9caa-4c25-a442-f210b6857763" />
 
+<img width="1014" height="178" alt="image" src="https://github.com/user-attachments/assets/2cb9793c-4e99-4795-ac2d-92be5b392d1d" />
 
 ### Сценарий 10: Финальный вывод всех маршрутов
 Все маршруты из коллекции выводятся с помощью метода `map`, который преобразует автобусы в их номера маршрутов.
 
+<img width="842" height="128" alt="image" src="https://github.com/user-attachments/assets/e50f6b59-1497-4ed6-8f0a-6eb341b852f6" />
 
-![Uploading image.png…]()
+
+
+
 
 
 ---
