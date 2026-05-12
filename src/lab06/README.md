@@ -109,6 +109,8 @@
 ### Сценарий 8: Демонстрация структурной типизации
 Поясняется, что классы Bus, CityBus и TouristBus не наследуются от протоколов Displayable и Scorable. Тем не менее, они успешно используются в специализированных коллекциях, потому что имеют нужные методы. Это и есть структурная типизация – важен интерфейс, а не наследование.
 
+<img width="1208" height="290" alt="image" src="https://github.com/user-attachments/assets/11575780-e521-45bb-95ea-b5b23500ba24" />
+
 <img width="1184" height="244" alt="image" src="https://github.com/user-attachments/assets/4d463aef-360b-4f47-b409-83ce02320124" />
 
 
