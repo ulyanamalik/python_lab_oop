@@ -1,0 +1,9 @@
+[
+  {
+    "type": "bus",
+    "route": "12",
+    "capacity": 13,
+    "passengers": 1,
+    "status": "on_route"
+  }
+]

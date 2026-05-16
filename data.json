@@ -1,0 +1,27 @@
+[
+  {
+    "type": "city",
+    "route": "100",
+    "capacity": 50,
+    "passengers": 20,
+    "status": "parked",
+    "route_type": "городской",
+    "has_air_conditioning": true
+  },
+  {
+    "type": "bus",
+    "route": "200",
+    "capacity": 50,
+    "passengers": 30,
+    "status": "on_route"
+  },
+  {
+    "type": "tourist",
+    "route": "300",
+    "capacity": 60,
+    "passengers": 2,
+    "status": "on_route",
+    "has_toilet": true,
+    "comfort_level": 4
+  }
+]
